@@ -1,0 +1,50 @@
+body{
+    background: #f4f3f3;
+    font-size: 20px;
+}
+
+.title{
+    text-align: center;
+    font-size: 30px;
+}
+
+.description{
+    text-align: center;
+}
+
+.game{
+    margin-top: 50px;
+    text-align: center;
+}
+
+.presentation{
+    display: inline-block;
+    width: 40%;
+    vertical-align: top;
+}
+
+.presentation .name{
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.reference{
+    display: inline-block;
+    width: 40%;
+    max-width: 500px;
+    margin-top: 35px;
+}
+
+.reference .links{
+    text-align: center;
+}
+
+.reference .links a{
+    margin: 0 20px;
+}
+
+.reference img{
+    border: 1px solid black;
+    width: 100%;
+}
