@@ -1,0 +1,143 @@
+<html>
+    <body>
+    </body>
+
+    <script>
+        var clickFunctions = [
+            function(e){
+                rotateBy(e.target, 45);
+            },
+            function(e){
+                rotateBy(e.target, randInt(1,359));
+            },
+            function(e){
+                setInterval(function(){
+                    rotateBy(e.target, 1);
+                }, 1);
+            },
+            function(e){
+                var i = 0;
+                var interval = setInterval(function(){
+                    i++
+                    rotateBy(e.target, 1);
+                    if(i == 360)
+                        clearInterval(interval);
+                }, 1);
+            },
+            function(e){
+                var i = 0;
+                var interval = setInterval(function(){
+                    i++
+                    rotateBy(e.target, 1);
+                    if(i == 355)
+                        clearInterval(interval);
+                }, 1);
+            },
+            function(e){
+                var oldSize = window.getComputedStyle(e.target, null).getPropertyValue('font-size').split("px")[0]
+                
+                e.target.style.fontSize = (parseInt(oldSize) + 1) + "px";
+            },
+            function(e){
+                var oldSize = window.getComputedStyle(e.target, null).getPropertyValue('font-size').split("px")[0]
+                
+                e.target.style.fontSize = (parseInt(oldSize) - 1) + "px";
+            },
+            function(e){
+                var oldLeft = e.target.style.left.split("px")[0];
+                e.target.style.left = (parseInt(oldLeft) + 1) + "px";
+            },
+            function(e){
+                var oldLeft = e.target.style.left.split("px")[0];
+                e.target.style.left = (parseInt(oldLeft) - 1) + "px";
+            },
+            function(e){
+                e.target.remove()
+            },
+            function(e){
+            },
+            function(e){
+            }
+        ]
+        var colors = [
+            "pink",
+            "blue",
+            "grey",
+            "red",
+            "hotpink",
+            "darkgrey",
+        ]
+        
+        function updateElement(element)
+        {
+            element.node.innerHTML = parseInt(element.node.innerHTML)+element.increment;
+            setTimeout(function(){
+                updateElement(element);
+            },randInt(element.updateSpeed.min, element.updateSpeed.max));
+        }
+
+        function addElement()
+        {
+            node = document.createElement("div")
+            node.onclick = randElement(clickFunctions);
+            node.className = "number";
+            node.innerHTML = 0;
+            node.style.top = randInt(0, document.body.offsetHeight) + "px";
+            node.style.left = randInt(0, document.body.offsetWidth) + "px";
+            if(randInt(1,10) == 1)
+            {
+                node.style.color = randElement(colors);
+            }
+            if(randInt(1,10) == 1)
+            {
+                node.style.fontSize = randInt(15,45);
+            }
+            document.body.append(node);
+
+            var element = {
+                node: node,
+                increment: randInt(1,10),
+                updateSpeed: {min: 1000, max: 6000}
+            };
+
+            updateElement(element);
+
+            setTimeout(function(){
+                addElement();
+            },randInt(30000,120000));
+        }
+
+        function randInt(min,max)
+        {
+            return Math.floor(Math.random()*(max+1))+min;
+        }
+        function randElement(arr)
+        {
+            return arr[randInt(0,arr.length-1)];
+        }
+        function rotateBy(e,deg)
+        {
+            var transform = e.style.transform;
+            if(transform == "")
+                var currentAngle = 0;
+            else
+                var currentAngle = parseInt( transform.split("rotate(")[1].split("deg")[0] );
+                
+            e.style.transform = "rotate(" + (currentAngle+deg) + "deg)"
+        }
+        addElement();
+    </script>
+
+    <style>
+        body{
+            height: 100%;
+            font-size: 30px;
+            overflow: hidden;
+        }
+
+        .number{
+            position: fixed;
+            user-select: none;
+        }
+    </style>
+</html>
