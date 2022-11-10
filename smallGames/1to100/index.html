@@ -1,0 +1,206 @@
+<html>
+    <body>
+        <div id = "instructions">
+            On their turn, players will have to select a number from 1 to 100.
+            The player with the highest number wins.
+            How many people will play?
+            (With only 1 player, you'll play against an AI)
+        </div>
+        <div id="slidecontainer">
+          <input type="range" min="1" max="8" value="2" class="slider" id="myRange" onmouseup="onSliderReleased()" ontouchend="onSliderReleased()">
+        </div>
+        <div id = "number">
+
+        </div>
+    </body>
+
+    <script>
+        var slider = document.getElementById("myRange");
+        var output = document.getElementById("number");
+        output.innerHTML = slider.value; // Display the default slider value
+        var currentGamePhase = "selectPlayersNumber";
+        var gamesPhases = ["selectPlayersNumber", "playersPlaying", "results"];
+
+        var numberOfPlayers = -1;
+        var currentPlayer = 1;
+
+        var scores = [];
+
+        var playingAgainstAI = false;
+        var scoreMethod = -1;
+
+        // Update the current slider value (each time you drag the slider handle)
+        slider.oninput = function() {
+          output.innerHTML = this.value;
+        }
+
+        function onSliderReleased () {
+            console.log(slider.value);
+            switch(currentGamePhase){
+                case "selectPlayersNumber":
+                    numberOfPlayers = slider.value;
+                    slider.min = 1;
+                    slider.max = 100;
+                    slider.value = 50;
+                    incrementGamePhase();
+                    break;
+                case "playersPlaying":
+                    scores.push(parseInt(slider.value));
+                    slider.min = 1;
+                    slider.max = 100;
+                    slider.value = 50;
+                    output.innerHTML = 50;
+                    currentPlayer++;
+                    if(currentPlayer > numberOfPlayers) incrementGamePhase();
+                    else instructions.innerHTML = "It is player " + currentPlayer + "'s turn.";
+                    break;
+                case "results":
+                    if(slider.value == 36)
+                        incrementGamePhase();
+                    else if(slider.value == 35)
+                        replayWithSamePlayers();
+                    else if(slider.value == 101)
+                        location.href = "https://rafiki.itch.io/triangle-or-square";
+                    break;
+            }
+        }
+
+        function incrementGamePhase(){
+            switch(currentGamePhase){
+                case "selectPlayersNumber":
+                    currentGamePhase = "playersPlaying";
+
+                    if(numberOfPlayers == 1){
+                        playingAgainstAI = true;
+                        instructions.innerHTML = "Great. You're playing against an AI. It's your turn."
+                        if(scoreMethod == -1) scoreMethod = Math.floor(Math.random() * 7);
+                        console.log("Score method: " + scoreMethod);
+                    }
+                    else
+                    instructions.innerHTML = "Great. " + numberOfPlayers + " people are playing. It is player 1's turn.";
+                    break;
+                case "playersPlaying":
+                    currentGamePhase = "results";
+                    showFinalResults();
+                    break;
+                case "results":
+                    restart();
+                    break
+            }
+
+            output.innerHTML = slider.value;
+        }
+
+        function replayWithSamePlayers(){
+            restart();
+            slider.min = 1;
+            slider.max = 100;
+            slider.value = 50;
+            incrementGamePhase();
+        }
+
+        function showFinalResults(){
+            instructions.innerHTML = "The game is over. ";
+            var highestScore = 0;
+            var bestPlayer = [];
+
+            if(playingAgainstAI){
+                scores.push(computeAIScore());
+                instructions.innerHTML += "You chose " + scores[0] + ". The AI chose " + scores[1]+ ". ";
+                if(scores[0] > scores[1]) instructions.innerHTML += "You win.";
+                else if(scores[1] > scores[0]) instructions.innerHTML += "The AI wins.";
+                else instructions.innerHTML += "It's a tie.";
+            }
+            else{
+                for(var i = 0; i < scores.length; i++){
+                    console.log("Score " + i + " = " + scores[i]);
+                    instructions.innerHTML += "Player " + (i+1) + " chose " + scores[i] + ". ";
+                    if(scores[i] > highestScore){
+                        bestPlayer = [];
+                        bestPlayer.push(i + 1);
+                        highestScore = scores[i];
+                    }
+                    else if (scores[i] == highestScore) {
+                        bestPlayer.push(i + 1);
+                        highestScore = scores[i];
+                    }
+                }
+                if(bestPlayer.length == 1) instructions.innerHTML += "Player " + bestPlayer[0] + " wins. Congratulations.";
+                else{
+                    instructions.innerHTML += "It's a tie between "
+                    if(numberOfPlayers == 2){
+                        "player 1 and player 2."
+                    }
+                    else{
+                        for(var i = 0; i < bestPlayer.length - 1; i++){
+                            instructions.innerHTML += "player " + bestPlayer[i] + ", ";
+                        }
+                        instructions.innerHTML += "and player " + bestPlayer[bestPlayer.length-1] + ".";
+                    }
+                }
+            }
+
+            instructions.innerHTML += " Thanks for playing. If you want to play again, select 35 on the slider. If you want to change the number of players, select 36. To play a better game, select 101."
+        }
+
+        function computeAIScore () {
+            switch(scoreMethod){
+                case 0:
+                    return Math.floor(Math.random() * 100) + 1;
+                    break;
+                case 1:
+                    return scores[0] + 1;
+                    break;
+                case 2:
+                    return Math.min(Math.max(Math.floor(Math.random() * 100) + 1, scores[0] + 1), 100);
+                    break;
+                case 3:
+                    return scores[0] - 1;
+                    break;
+                case 4:
+                    return Math.max(Math.min(Math.floor(Math.random() * 100) + 1, scores[0] - 1), 1);
+                    break;
+                case 5:
+                    return scores[0];
+                    break;
+                case 6:
+                    return 69;
+                    break;
+            }
+        }
+
+        function restart(){
+            instructions.innerHTML = "On their turn, players will have to select a number from 1 to 100. The player with the highest number wins. How many people will play? (With only 1 player, you'll play against an AI)";
+
+            playingAgainstAI = false;
+            currentGamePhase = "selectPlayersNumber";
+            currentPlayer = 1;
+            scores = [];
+            slider.min = 1;
+            slider.max = 8;
+            slider.value = 2;
+        }
+
+    </script>
+    
+    <style>
+        body{
+            background-color: white;
+            text-align: center;
+            font-size: 25px;
+        }
+
+        div{
+            margin-top: 10px;
+        }
+
+        .slider{
+            width: 69%;
+        }
+
+        #instructions{
+            display: inline-block;
+            width: 80%;
+        }
+    </style>
+</html>

@@ -1,0 +1,144 @@
+<html>
+	<body>
+		<div id = "container">
+			<div id = "shitpost"></div>
+			
+			<button id = "generateShitpostBtn">
+				Generate new shitpost
+			</button>
+			<br>
+			<a id = "leTweet" class="twitter-share-button" target = "_blank">
+				Tweet
+			</a>
+			<input type="text" value="Hello World" id="toCopy">
+
+        	<button onclick="copyToClipboard()">Copy shitpost</button>
+        	<button onclick="downloadAsPng(document.querySelector('#shitpost'))">Download shitpost</button>
+        	<button id="copyAsImage" onclick="copyAsPng(document.querySelector('#shitpost'))">Copy as image</button>
+
+		</div>
+
+	</body>
+
+	<script src="html2canvas.js"></script>
+	<script>
+		//Big todo:
+		/*
+		-Changing screenshot name
+
+		-Formattage pour mobile
+		-Corriger la grammaire, plural et is a bit of
+		-Consideration: plusieurs emojis?
+		-Consideration: le yet
+		-Consideration: consideration
+		-Save screenshot button
+		-Copy to clipboard
+		-Random couleur de peau et gender
+
+		-Le stack
+		*/
+
+		//101
+		var subjects = ["Britney Spears", "Monogamy", "Pikachu", "Canada", "Video games", "Twitter", "Memes", "Drag queens", "Therapy", "Love", "Education", "Sex", "Capitalism", "Communism", "NFTs", "Bimbos", "Patriarchy", "PowerPoint", "Jesus", "Making games", "Flirting", "Freedom", "Getting tattooed", "Kissing", "Living", "Gender", "Falling in love", "Everything", "Nothing", "Trying your best", "Working full-time", "Having kids", "Going outside","Failure", "Success", "Making friends", "Murder", "Astrology", "Doing the right thing", "Improving yourself","Being attractive", "Veganism", "Shitposting", "Self-care", "Your mom", "Breaking the law", "Being alone", "Taxes", "Rent", "Pumpkin spice latte", "Consent", "Threesomes", "Being an adult", "Harry Potter", "Star Wars", "Exercising", "Nintendo", "Universal healthcare", "Knowing your rights", "Admitting your mistakes", "Knowing your limits", "Drinking", "Stepping out of your comfort zone", "Elon Musk", "Spider-Man", "Getting called out", "Attending a family gathering", "Garfield", "Gossiping", "Climate changes", "Pineapple on pizza", "Productivity", "Being true to yourself", "Dogs", "Opening up", "You", "Solidarity", "Feminism", "Happiness", "The Beatles", "Manifesting", "Your feelings", "Following your dreams", "Listening to your instincts", "Marvel", "Disney", "Lesbians", "Bottoms", "Science", "Good people", "Polyamory", "True crimes podcasts", "Drinking coffee", "Hoarding money", "Booty calls", "Believing in yourself", "Burning out", "Getting a tongue-split", "Making out", "Karaoke", "Eggnog", "Imposter syndrome", "Being cute", "The government"];
+
+		//10
+        var verbs = ["is", "is", "is not", "is not", "can be", "can't be", "should be","shouldn't be","is always", "is never", "is a bit", "is pretty much"];
+
+        //104
+        var complements = ["weird", "real", "canceled", "illegal", "fun", "surreal", "complicated" ,"a spectrum", "limitless", "the endgame", "mandatory", "normalized", "valid", "vegan", "a struggle" ,"magical", "sexy", "a red flag", "a hoax", "acceptable", "healthy", "a relief", "a social construct", "easy", "obsolete", "beautiful", "gay", "a mood", "overrated", "underrated", "legit", "a thing", "on the table", "allowed", "kinky", "fundamental", "a commitment", "addictive", "woke", "awful", "romantic", "random", "a blessing", "right", "wrong", "better than expected", "the worst", "interesting", "political", "a lifestyle", "a good habit", "a bad habit", "a coping mechanism", "my favorite thing", "a statement", "shitty", "dull", "ethical", "harmless", "offensive", "enough", "natural", "misunderstood", "tolerated", "meh", "an issue", "frowned upon", "trendy", "therapy", "free", "flawless", "a right", "a duty", "a privilege", "taught in school", "for everyone", "nationalized", "ironic", "sustainable", "compensated", "all you do", "a threat", "platonic", "edgy", "trash", "celebrated", "painful", "revolutionary", "transgressive", "important", "scary", "yummy", "toxic", "goals", "acknowledged", "seen", "fatal", "hereditary", "radical", "an act of resistance", "horny", "so 2004", "clever", "mainstream", "epic", "taboo", "problematic", "a waste of time", "cute", "a mistake"];
+
+        //Anatomical heart? Le monkey qui se cache les yeux
+        //45
+        var emojis = ["👌","🍆", "✨", "🔥", "😅", "🌈", "🤖", "💖", "😬", "🤔", "😈", "😍", "👀", "💦", "💯", "😐", "💩", "😤", "🙄", "😳", "😱", "😏", "😭", "😟", "🚩", "🤯", "🤫", "🤷" ,"🤨", "😠", "🙏", "🥺", "🥴", "💅", "🍑", "🤦", "🙌", "🥰", "🤘", "😩", "😒", "💀", "🙈", "😘"];
+
+        var shitpostStackOrQueue = "";
+
+        document.querySelector("#generateShitpostBtn").onclick = generateShitpost;
+
+        try{
+            ClipboardItem;
+        }catch{
+            document.querySelector("#copyAsImage").remove();
+        }
+
+        generateShitpost();
+        function generateShitpost(){
+        	console.log(emojis.length);
+
+        	var currentShitpost = pickARandomElement(subjects) + " " + pickARandomElement(verbs) + " " 
+        		+ pickARandomElement(complements) + " " + pickARandomElement(emojis);
+        	console.log(currentShitpost);
+
+        	document.querySelector("#shitpost").innerHTML = currentShitpost;
+        	document.querySelector("#leTweet").href = "https://twitter.com/intent/tweet?text=" + currentShitpost;
+
+			document.getElementById("toCopy").value = currentShitpost;
+
+        }
+
+        function pickARandomElement(arrayToPickFrom){
+        	return arrayToPickFrom[Math.floor(Math.random() * arrayToPickFrom.length)];
+        }
+
+        function copyToClipboard() {
+            var copyText = document.getElementById("toCopy");
+
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /* For mobile devices */
+            
+            navigator.clipboard.writeText(copyText.value);
+        }
+        function downloadAsPng(node) {
+            html2canvas(node).then(canvas => {
+                // Convert the canvas to data
+                var image = canvas.toDataURL();
+                // Create a link
+                var aDownloadLink = document.createElement('a');
+                // Add the name of the file to the link
+                aDownloadLink.download = 'shitpost.png';
+                // Attach the data to the link
+                aDownloadLink.href = image;
+                // Get the code to click the download link
+                aDownloadLink.click();
+            });
+        }
+        function copyAsPng(node) {
+            html2canvas(node).then(canvas => {
+                // Convert the canvas to data
+                canvas.toBlob(blob => navigator.clipboard.write([new ClipboardItem({'image/png': blob})]))
+            });
+        }
+	</script>
+
+	<style>
+		div#container {
+    		text-align: center;
+		}
+
+		div#shitpost {
+    		font-size: 100px;
+    		min-height: 250px;
+    	}
+
+    	button#generateShitpostBtn {
+ 			font-size: 50px;
+ 			margin-top: 50px;
+    		padding: 10px;
+    		display: inline-block;
+		}
+
+		a#leTweet {
+			margin-top: 35px;
+    		font-size: 50px;
+    		background-color: #efefef;
+    		border: 1px solid rgb(118 118 118);
+    		padding: 10px;
+    		text-decoration: none;
+    		display: inline-block;
+    		color: blue;
+		}
+		#toCopy{
+            display: none;
+        }
+	</style>
+</html>

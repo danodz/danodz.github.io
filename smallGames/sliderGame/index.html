@@ -1,0 +1,109 @@
+<html>
+    <body>
+        <input class="slider" type="range" min="0" max="1000" onmouseup="sliderUpdate()" ontouchend="sliderUpdate()">
+        <div class="output">
+        </div>
+        <div class="targetNumber">
+        </div>
+        <div class="text">
+        </div>
+        <div class="countdown">
+        </div>
+    </body>
+
+    <script>
+        var numbers = [143,200,334,410,565,634,756,823,567,1000]
+        var texts = [
+            "first",
+            "second",
+            "third",
+            "asdf",
+            "yeah ok",
+            "lorem ipsum",
+            "whatever",
+            "soon",
+            "almost done",
+            "congrats"
+        ];
+        var progress = 0;
+        var interval = 0;
+        var countdown = 0;
+
+
+        var slider = document.querySelector(".slider");
+        slider.value = 500;
+        var output = document.querySelector(".output");
+        var text = document.querySelector(".text");
+        var targetNumberTxt = document.querySelector(".targetNumber");
+        var countdownTxt = document.querySelector(".countdown");
+        targetNumberTxt.innerHTML = "Select "+ numbers[0] +" to start";
+
+        output.innerHTML = slider.value;
+        slider.oninput = function() {
+            output.innerHTML = slider.value;
+        } 
+        var currentPlayer;
+        
+        function sliderUpdate()
+        {
+            if(progress == 8 && slider.value == 566)
+            {
+                console.log(slider.value);
+                fail();
+            }
+            if(slider.value == numbers[progress])
+            {
+                clearInterval(interval);
+                if(progress != 7)
+                {
+                    console.log(1);
+                    countdown = 5;
+                    countdownTxt.innerHTML = countdown;
+                    interval = setInterval(function(){
+                        countdown -= 1;
+                        countdownTxt.innerHTML = countdown;
+                        if(countdown == 0)
+                        {
+                            clearInterval(interval);
+                            fail();
+                        }
+                    },1000)
+                }
+                if(numbers[progress+1])
+                {
+                    targetNumberTxt.innerHTML = "Select " + numbers[progress+1] + " to proceed";
+                }
+                else
+                {
+                    targetNumberTxt.innerHTML = "Select to proceed";
+                }
+                text.innerHTML = texts[progress];                
+                progress += 1;
+            }
+        }
+
+        function fail()
+        {
+            targetNumberTxt.innerHTML = "Select "+ numbers[0] +" to restart";
+            text.innerHTML = "Fail"
+            slider.value = 500;
+            progress = 0;
+        }
+    </script>
+    
+    <style>
+        body{
+            background-color: white;
+            text-align: center;
+            font-size: 30px;
+        }
+        
+        .slider{
+            width: 69%;
+        }
+
+        .countdown{
+            font-size: 200px;
+        }
+    </style>
+</html>

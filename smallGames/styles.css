@@ -9,12 +9,14 @@ body{
 }
 
 .description{
-    text-align: center;
+    margin-top: 25px;
+    text-align: left;
 }
 
-.game{
+.item{
     margin-top: 50px;
     text-align: center;
+    height: 300px;
 }
 
 .presentation{

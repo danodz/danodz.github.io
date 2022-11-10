@@ -1,0 +1,113 @@
+<html>
+    <body>
+        <div class="text">
+        </div>
+        <div class="loseInstructions">
+            Press the red square to lose
+        </div>
+        <div class="game">
+            <div class="inlineBlock winBtn"></div><div class="inlineBlock loseBtn"></div>
+            <div class="winScore">
+                <div class="itemTxt inlineBlock">Win: </div>
+                <div class="count winCount inlineBlock">0</div>
+            </div>
+            <div class="loseScore">
+                <div class="itemTxt inlineBlock">Lose: </div>
+                <div class="count loseCount inlineBlock">0</div>
+            </div>
+        </div>
+    </body>
+
+    <script>
+        var texts = ["Press the blue triangle to win"];
+
+        if(localStorage.getItem("currentText"))
+            var currentText = parseInt(localStorage.getItem('currentText')) - 1;
+        else
+            var currentText = -1
+
+        nextText();
+
+        var winBtn = document.querySelector(".winBtn");
+        var loseBtn = document.querySelector(".loseBtn");
+        var winCount = 0;
+        var loseCount = 0;
+
+        var btnSize = window.innerWidth>600?200:100;
+
+        winBtn.style.borderLeftWidth= btnSize/2+"px";
+        winBtn.style.borderRightWidth= btnSize/2+"px";
+        winBtn.style.borderBottomWidth= btnSize+"px";
+
+        loseBtn.style.width= btnSize+"px";
+        loseBtn.style.height= btnSize+"px";
+        loseBtn.style.marginLeft= btnSize/2+"px";
+
+        winBtn.onclick = function(){
+            winCount += 1;
+            document.querySelector(".winCount").innerHTML = winCount;
+            nextText();
+        }
+
+        loseBtn.onclick = function(){
+            loseCount += 1;
+            document.querySelector(".loseCount").innerHTML = loseCount;
+            nextText();
+        }
+
+        function nextText()
+        {
+            if(currentText < texts.length - 1)
+            {
+                currentText += 1;
+                document.querySelector(".text").innerHTML = texts[currentText];
+                localStorage.setItem('currentText', currentText);
+            }
+        }
+
+    </script>
+    
+    <style>
+        body{
+            background-color: white;
+        }
+
+        .text{
+            text-align: center;
+            font-size: 40px;
+        }
+
+        .loseInstructions{
+            text-align: center;
+        }
+
+        .game{
+            text-align: center;
+            font-size: 30px;
+            margin-top: 25px;
+        }
+
+        .inlineBlock{
+            display: inline-block;
+        }
+
+        .winBtn{
+            width: 0; 
+            height: 0; 
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 200px solid blue;
+        }
+        
+        .loseBtn{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            margin-left: 100px;
+        }
+        
+        .winScore{
+            margin-top: 50px;
+        }
+    </style>
+</html>
