@@ -1,6 +1,12 @@
 body{
     background: #f4f3f3;
     font-size: 20px;
+    margin: 0;
+}
+
+.intro{
+    width: 60%;
+    margin: 25px auto;
 }
 
 .title{
@@ -44,6 +50,7 @@ body{
 
 .reference .links a{
     margin: 0 20px;
+    display: inline-block;
 }
 
 .reference img{
