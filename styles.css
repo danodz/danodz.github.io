@@ -1,0 +1,11 @@
+body{
+    background: #f4f3f3;
+}
+.main{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.section{
+    width: 40%;
+}
