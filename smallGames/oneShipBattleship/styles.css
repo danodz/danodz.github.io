@@ -1,0 +1,66 @@
+.ready,.reset{
+    font-size: 16px;
+    vertical-align: top;
+}
+
+.reset{
+    float: right;
+}
+
+.status{
+    display: inline-block;
+}
+
+.grids {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 50px;
+}
+.row {
+    height: 40px;
+}
+.gridItem {
+    border: 1px solid black;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.decoy {
+    text-align: center;
+    font-size: 30px;
+    display: none;
+}
+
+.playerGrid .row .gridItem.boat {
+    background: black;
+}
+
+.moveFeedback{
+    text-align: center;
+    font-size: 50px;
+}
+
+.moveFeedback div{
+    display: none;
+}
+
+.playerGrid.locked .gridItem{
+    background: gainsboro;
+}
+
+.hidden{
+    display: none;
+}
+
+.transition, .inputBlock{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.transition{
+    background: gray;
+}
