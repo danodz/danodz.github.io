@@ -1,10 +1,14 @@
-.ready,.reset{
-    font-size: 16px;
-    vertical-align: top;
+.ready, .reset{
+    display: block;
+    margin: 0 auto;
+    font-size: 36px;
+    cursor: pointer;
+    margin-bottom: 25px;
 }
 
-.reset{
-    float: right;
+.boardError{
+    font-size: 36px;
+    text-align: center;
 }
 
 .status{
@@ -60,7 +64,32 @@
     left: 0;
     width: 100%;
     height: 100%;
+    z-index: 100;
 }
 .transition{
-    background: gray;
+    background: darkgray;
+    font-size: 36px;;
+    color: white;
+    text-align: center;
+}
+
+.transition .txt{
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+}
+
+.gameStatus, .yourField, .attackField{
+    text-align: center;
+}
+
+.gameOver{
+text-align: center;
+font-size: 76px;
+position: fixed;
+width: 100%;
+height: 100%;
+top: 25%;
+text-shadow: -1px -1px 0px #fff, 0px -1px 0px #fff, 1px -1px 0px #fff, -1px 0px 0px #fff, 1px 0px 0px #fff, -1px 1px 0px #fff, 0px 1px 0px #fff, 1px 1px 0px #fff;
 }

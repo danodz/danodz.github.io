@@ -12,6 +12,11 @@ const init = ()=>{
             folder: "numbers",
             repo: "funNumbers"
         },{
+            name: "One Ship Battleship",
+            description: "It's battleship, but you only have one ship.",
+            folder: "oneShipBattleship",
+            repo: "oneShipBattleshipLocal"
+        },{
 			name: "Slider Game",
 			description: "An experiment on how to make a hardcore adventure game with a simple slider.",
 			folder: "sliderGame",

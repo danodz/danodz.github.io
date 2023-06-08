@@ -8,28 +8,27 @@
         <script src="script.js"></script> 
     </head> 
     <body onload="init()"> 
-        <div class="transition hidden"></div>
+        <button onclick="reset()" class="reset hidden">Play Again</button>
+        <div class="transition hidden"><div class="txt">Pass laptop to opponent</div></div>
         <div class="inputBlock hidden"></div>
-        <button onclick="reset()" class="reset">Reset</button>
-        <div class="status">
-            <div class="gameStatus">
-                Making your board
-            </div>
-        </div>
-        <button onclick="setupDone()" class="ready">Ready</button>
-        <div class="boardError hidden">
-            BOARD ERROR
+        <div class="gameStatus">
         </div>
         <div class="gameOver hidden"></div>
         <div class="grids player1">
-            player 1
-            <div class="playerGrid"></div>
-            <div class="enemyGrid"></div>
+            <div class="playerGrid">
+                <div class="yourField"> Your field</div>
+            </div>
+            <div class="enemyGrid">
+                <div class="attackField">Opponent's field</div>
+            </div>
         </div>
         <div class="grids player2 hidden">
-            player 2
-            <div class="playerGrid"></div>
-            <div class="enemyGrid"></div>
+            <div class="playerGrid">
+                <div class="yourField"> Your field</div>
+            </div>
+            <div class="enemyGrid">
+                <div class="attackField">Opponent's field</div>
+            </div>
         </div>
         <div class="moveFeedback">
             <div class="missTxt">It's a miss</div>
@@ -38,6 +37,10 @@
                 <div class="decoy mermaid">On a mermaid</div>
                 <div class="decoy crab">On a crab</div>
             </div>
+        </div>
+        <button onclick="setupDone()" class="ready">Ready</button>
+        <div class="boardError hidden">
+            Invalid board
         </div>
     </body> 
 </html> 

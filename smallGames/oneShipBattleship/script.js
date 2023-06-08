@@ -1,9 +1,21 @@
+/*
+decoy timer
+game over
+- remove your field
+- qui qui gagne en gros au centre
+- rename players
+- new game button
+*/
+
+
 let player1 = {
     name: "player1",
+    displayName: "Player 1",
 };
 
 let player2 = {
     name: "player2",
+    displayName: "Player 2",
 };
 
 player1.enemy = player2;
@@ -13,29 +25,37 @@ currentPlayer = player1;
 
 let gameState = "setup";
 
-let gameStatusTxt;
-let connectionStatusTxt;
-let socket={emit:(a,b)=>{},on:(a,b)=>{}}
+const gameStateTxt = {
+    "setup": "make your board",
+    "playing": "make you move"
+}
 
 let transitionScreen;
 let inputBlock;
+let gameStatus;
+let transitionTimer = 20;
+
 function changePlayer(){
     inputBlock.classList.remove("hidden");
     setTimeout(()=>{
+        transitionTimer = 20;
         inputBlock.classList.add("hidden");
         transitionScreen.classList.remove("hidden");
         currentPlayer.grids.classList.add("hidden");
         currentPlayer.enemy.grids.classList.remove("hidden");
+
         currentPlayer = currentPlayer.enemy;
-    }, 1000);
+
+        gameStatus.innerHTML = currentPlayer.displayName + " " + gameStateTxt[gameState]
+        document.querySelector(".moveFeedback .missTxt").style.display="none";
+        document.querySelector(".moveFeedback .hitTxt").style.display="none";
+        document.querySelector(".moveFeedback .hitTxt .mermaid").style.display="none";
+        document.querySelector(".moveFeedback .hitTxt .crab").style.display="none";
+
+    }, transitionTimer);
 }
 
 function gridUpdate(grid, x, y, value){
-    document.querySelector(".moveFeedback .missTxt").style.display="none";
-    document.querySelector(".moveFeedback .hitTxt").style.display="none";
-    document.querySelector(".moveFeedback .hitTxt .mermaid").style.display="none";
-    document.querySelector(".moveFeedback .hitTxt .crab").style.display="none";
-
     if(value == "boat")
     {
         grid[x][y].style.background = "red";
@@ -44,6 +64,7 @@ function gridUpdate(grid, x, y, value){
     }
     else if(value == "mermaid" || value == "crab")
     {
+        transitionTimer = 5000;
         grid[x][y].style.background = "red";
         fadeIn(grid[x][y].querySelector("."+value))
 
@@ -88,6 +109,7 @@ function fadeIn(e){
 }
 
 function sendMove(e){
+    if(gameState !== "playing") return;
     let pos = e.currentTarget.dataset.position.split(",");
     let x = parseInt(pos[0]);
     let y = parseInt(pos[1]);
@@ -111,10 +133,14 @@ function sendMove(e){
     if(won){
         const node = document.querySelector(".gameOver");
         node.classList.remove("hidden");
-        node.innerText = currentPlayer.name + " Won!";
+        node.innerText = currentPlayer.displayName + " Won!";
 
         document.querySelectorAll(".grids").forEach((e)=>e.classList.remove("hidden"));
+        document.querySelectorAll(".reset").forEach((e)=>e.classList.remove("hidden"));
         document.querySelectorAll(".enemyGrid").forEach((e)=>e.classList.add("hidden"));
+        document.querySelectorAll(".yourField").forEach((e)=>e.classList.add("hidden"));
+        document.querySelectorAll(".gameStatus").forEach((e)=>e.classList.add("hidden"));
+        document.querySelectorAll(".moveFeedback").forEach((e)=>e.classList.add("hidden"));
     } else {
         changePlayer();
     }
@@ -123,11 +149,11 @@ function sendMove(e){
 function init(){
     initPlayer(player1);
     initPlayer(player2);
-    gameStatusTxt = document.querySelector(".gameStatus");
-    connectionStatusTxt = document.querySelector(".connectionStatus");
 
     transitionScreen = document.querySelector(".transition");
     inputBlock = document.querySelector(".inputBlock");
+    gameStatus = document.querySelector(".gameStatus");
+    gameStatus.innerHTML = currentPlayer.displayName + " " + gameStateTxt[gameState]
     transitionScreen.onclick = (e)=>{ e.currentTarget.classList.add("hidden") }
 }
 
@@ -153,7 +179,7 @@ function makeGrid(root, clickFn){
 
             let mermaid = document.createElement("div");
             mermaid.className = "decoy mermaid";
-            mermaid.innerText = "S";
+            mermaid.innerText = "M";
             item.appendChild(mermaid);
 
             let crab = document.createElement("div");
@@ -172,6 +198,7 @@ function changeTile(e){
     if(gameState != "setup")
         return;
 
+    document.querySelector(".boardError").classList.add("hidden");
     if(e.currentTarget.dataset.contains == "empty")
     {
         e.currentTarget.dataset.contains = "boat";
@@ -233,7 +260,6 @@ function setupDone(){
     {
         for(var j=0; j<board[i].length; j++)
         {
-            console.log(board[i][j]);
             if(board[i][j].type == "boat"){
                 validateTile(i,j);
                 if(!board.every(function(row){
@@ -256,13 +282,11 @@ function setupDone(){
         if(currentPlayer.name === "player1")
         {
             currentPlayer.grids.querySelector(".playerGrid").classList.add("locked");
-            document.querySelector(".boardError").classList.add("hidden");
 
             changePlayer();
         } else {
             gameState = "playing"
             currentPlayer.grids.querySelector(".playerGrid").classList.add("locked");
-            document.querySelector(".boardError").classList.add("hidden");
             document.querySelector(".ready").classList.add("hidden");
 
             changePlayer();
@@ -277,12 +301,3 @@ function setupDone(){
 function reset(){
     location.reload();
 }
-
-socket.on("reset",function(){
-    document.querySelector(".playerGrid").innerHTML = "";
-    document.querySelector(".enemyGrid").innerHTML = "";
-    document.querySelector(".playerGrid").classList.remove("locked");
-    document.querySelector(".ready").classList.remove("hidden");
-    document.querySelector(".gameOver").classList.add("hidden");
-    init();
-});
