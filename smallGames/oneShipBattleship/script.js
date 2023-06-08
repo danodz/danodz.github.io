@@ -1,13 +1,3 @@
-/*
-decoy timer
-game over
-- remove your field
-- qui qui gagne en gros au centre
-- rename players
-- new game button
-*/
-
-
 let player1 = {
     name: "player1",
     displayName: "Player 1",
@@ -33,12 +23,12 @@ const gameStateTxt = {
 let transitionScreen;
 let inputBlock;
 let gameStatus;
-let transitionTimer = 20;
+let transitionTimer = 2000;
 
 function changePlayer(){
     inputBlock.classList.remove("hidden");
     setTimeout(()=>{
-        transitionTimer = 20;
+        transitionTimer = 2000;
         inputBlock.classList.add("hidden");
         transitionScreen.classList.remove("hidden");
         currentPlayer.grids.classList.add("hidden");
