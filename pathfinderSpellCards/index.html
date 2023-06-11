@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <script src="spells.json"></script>
+        <script src="script.js"></script>
+        <script src="mustache.js"></script>
+        <link rel="stylesheet" href="style.css" type="text/css">
+    </head>
+    <body onload="init()">
+        <div class="searchPage">
+            <div class="filters">
+                <div class="fields spellsEn">
+                    <div class="fieldsContent">
+                        <div class="title">English</div>
+                        <div class="field">
+                            <label>Search</label> <input data-language="en" class="search">
+                            <div class="hidden suggestions"></div>
+                        </div>
+                        <div class="field"><label>Spell List</label> <textarea class="spellList"></textarea></div>
+                    </div>
+                </div>
+                <div class="separator"></div>
+                <div class="fields spellsFr">
+                    <div class="fieldsContent">
+                        <div class="title">Français</div>
+                        <div class="field">
+                            <label>Recherche</label> <input data-language="fr" class="search">
+                            <div class="hidden suggestions"></div>
+                        </div>
+                        <div class="field"><label>Liste de sorts</label> <textarea class="spellList"></textarea></div>
+                    </div>
+                </div>
+            </div>
+            <select class="sortBy">
+                <option>Alphabetical EN</option>
+                <option>Alphabetical FR</option>
+            </select>
+            <button class="refresh">Refresh</button>
+        </div>
+        <template id="card">
+            <div class="card">
+                <div class="name">
+                </div>
+                <div class="school">
+                </div>
+                <div class="level">
+                </div>
+                <div class="castTime">
+                </div>
+                <div class="components">
+                </div>
+                <div class="range">
+                </div>
+                <div class="target">
+                </div>
+                <div class="duration">
+                </div>
+                <div class="save">
+                </div>
+                <div class="spellResistance">
+                </div>
+                <div class="description">
+                </div>
+            </div>
+        </template>
+    </body>
