@@ -97,6 +97,10 @@ table{
     font-size: 8px;
 }
 
+.card .description{
+    padding-bottom: 4px;
+}
+
 .name {
     text-align: center;
     font-size: 12px;
