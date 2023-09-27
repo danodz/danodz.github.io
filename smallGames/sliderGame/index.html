@@ -1,29 +1,29 @@
 <html>
     <body>
-        <input class="slider" type="range" min="0" max="1000" onmouseup="sliderUpdate()" ontouchend="sliderUpdate()">
-        <div class="output">
+        <div class="text">
         </div>
         <div class="targetNumber">
         </div>
-        <div class="text">
+        <input class="slider" type="range" min="0" max="1000" onmouseup="sliderUpdate()" ontouchend="sliderUpdate()">
+        <div class="output">
         </div>
         <div class="countdown">
         </div>
     </body>
 
     <script>
-        var numbers = [143,200,334,410,565,634,756,823,567,1000]
+        var numbers = [143,200,334,410,22,634,756,823,567,1000]
         var texts = [
-            "first",
-            "second",
-            "third",
-            "asdf",
-            "yeah ok",
-            "lorem ipsum",
-            "whatever",
-            "soon",
-            "almost done",
-            "congrats"
+            "You want to get somewhere. For that, you walk 143m.",
+            "You now run 200m.",
+            "You steal a bike and ride 334m.",
+            "You borrow a car from your uncle and ride 410km.",
+            "You arrive at a cliff of 22m. You jump.",
+            "You land into a kayak and paddle for 634m.",
+            "You're bored from paddling. You get out of the kayak and swim for 756m.",
+            "You arrive at the shore, completely exhausted. You sleep for 823 minutes.",
+            "You wake up and roll for 567m.",
+            "You arrive where you wanted to go. You're happy. You feel 1000 fireworks in your heart."
         ];
         var progress = 0;
         var interval = 0;
@@ -46,36 +46,27 @@
         
         function sliderUpdate()
         {
-            if(progress == 8 && slider.value == 566)
-            {
-                console.log(slider.value);
-                fail();
-            }
             if(slider.value == numbers[progress])
             {
                 clearInterval(interval);
-                if(progress != 7)
-                {
-                    console.log(1);
-                    countdown = 5;
+                countdown = 8;
+                countdownTxt.innerHTML = countdown;
+                interval = setInterval(function(){
+                    countdown -= 1;
                     countdownTxt.innerHTML = countdown;
-                    interval = setInterval(function(){
-                        countdown -= 1;
-                        countdownTxt.innerHTML = countdown;
-                        if(countdown == 0)
-                        {
-                            clearInterval(interval);
-                            fail();
-                        }
-                    },1000)
-                }
+                    if(countdown == 0)
+                    {
+                        clearInterval(interval);
+                        fail();
+                    }
+                },1000)
                 if(numbers[progress+1])
                 {
                     targetNumberTxt.innerHTML = "Select " + numbers[progress+1] + " to proceed";
                 }
                 else
                 {
-                    targetNumberTxt.innerHTML = "Select to proceed";
+                    targetNumberTxt.innerHTML = "There might be a secret ending if you select the right number.";
                 }
                 text.innerHTML = texts[progress];                
                 progress += 1;
