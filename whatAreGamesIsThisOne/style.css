@@ -1,0 +1,43 @@
+
+body{
+    background-color: white;
+}
+
+.text{
+    text-align: center;
+    font-size: 40px;
+}
+
+.loseInstructions{
+    text-align: center;
+}
+
+.game{
+    text-align: center;
+    font-size: 30px;
+    margin-top: 25px;
+}
+
+.inlineBlock{
+    display: inline-block;
+}
+
+.winBtn{
+    width: 0; 
+    height: 0; 
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-bottom: 200px solid blue;
+}
+
+.loseBtn{
+    width: 200px;
+    height: 200px;
+    background-color: red;
+    margin-left: 100px;
+}
+
+.winScore{
+    margin-top: 50px;
+}
+
