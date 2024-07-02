@@ -1,6 +1,9 @@
-
 body{
     background-color: white;
+}
+
+.textLink{
+    float: right;
 }
 
 .text{
@@ -12,10 +15,40 @@ body{
     text-align: center;
 }
 
+.middleSection{
+}
+
+@media (min-width: 750px) {
+    .caracteristics{
+        width: 33%;
+    }
+}
+
+.caracteristics{
+    display: inline-block;
+    vertical-align: middle;
+    text-align: right;
+}
+
+.caracteristics div{
+    width: fit-content;
+    text-align: left;
+    display: inline-block;
+    margin-right: 35px;
+}
+
+.rules{
+    text-align: center;
+    font-size: 30px;
+    margin-top: 25px;
+}
+
 .game{
     text-align: center;
     font-size: 30px;
     margin-top: 25px;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .inlineBlock{
@@ -41,3 +74,6 @@ body{
     margin-top: 50px;
 }
 
+.hidden{
+    display: none;
+}

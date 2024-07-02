@@ -18,6 +18,15 @@ function updateScreen(){
 		gameData.meme = false;
 	} else {
         document.querySelector(".text").innerHTML = texts[gameData.currentText];
+        if(gameData.currentText >= 177){
+            document.querySelector(".caracteristics .one").classList.remove("hidden");
+        }
+        if(gameData.currentText >= 178){
+            document.querySelector(".caracteristics .two").classList.remove("hidden");
+        }
+        if(gameData.currentText >= 179){
+            document.querySelector(".caracteristics .three").classList.remove("hidden");
+        }
     }
 }
 
@@ -34,7 +43,7 @@ loseBtn.style.width= btnSize+"px";
 loseBtn.style.height= btnSize+"px";
 loseBtn.style.marginLeft= btnSize/2+"px";
 
-const winSound = new Audio('win.wav');
+const winSound = new Audio('res/win.wav');
 winBtn.onclick = function(){
 	winSound.pause();
 	winSound.currentTime = 0;
@@ -43,7 +52,7 @@ winBtn.onclick = function(){
     nextText();
 }
 
-const loseSound = new Audio('lose.wav');
+const loseSound = new Audio('res/lose.wav');
 loseBtn.onclick = function(){
 	loseSound.pause();
 	loseSound.currentTime = 0;
@@ -66,6 +75,9 @@ function restart(){
 	gameData.meme = true;
     gameData.winCount = 0;
     gameData.loseCount = 0;
+    document.querySelector(".caracteristics .one").classList.add("hidden");
+    document.querySelector(".caracteristics .two").classList.add("hidden");
+    document.querySelector(".caracteristics .three").classList.add("hidden");
     updateScreen();
     localStorage.setItem("gameData", JSON.stringify(gameData));
 }

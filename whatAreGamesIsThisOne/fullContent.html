@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta charset="UTF-8"> 
+	</head>
+    <body>
+        <div class="fullText">- Press the blue triangle to win. Press the red square to lose. </div>
+    </body>
+
+    <script src="./texts.js"></script>
+    <script>
+        for(let i = 1; i<texts.length; i++){
+            document.querySelector(".fullText").innerHTML += "<p>- " + texts[i] + "</p>";
+        }
+    </script>
+    <style>
+        .fullText{
+            margin-left: 25px;
+            font-size: 18px;
+        }
+    </style>
+</html>
