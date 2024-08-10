@@ -27,12 +27,15 @@ function updateScreen(){
         if(gameData.currentText >= 179){
             document.querySelector(".caracteristics .three").classList.remove("hidden");
         }
+        if(gameData.currentText >= 208){
+            document.querySelector(".caracteristics").classList.add("hidden");
+        }
     }
 }
 
 var winBtn = document.querySelector(".winBtn");
 var loseBtn = document.querySelector(".loseBtn");
-
+/*
 var btnSize = window.innerWidth>600?200:100;
 
 winBtn.style.borderLeftWidth= btnSize/2+"px";
@@ -42,6 +45,7 @@ winBtn.style.borderBottomWidth= btnSize+"px";
 loseBtn.style.width= btnSize+"px";
 loseBtn.style.height= btnSize+"px";
 loseBtn.style.marginLeft= btnSize/2+"px";
+*/
 
 const winSound = new Audio('res/win.wav');
 winBtn.onclick = function(){
@@ -78,6 +82,7 @@ function restart(){
     document.querySelector(".caracteristics .one").classList.add("hidden");
     document.querySelector(".caracteristics .two").classList.add("hidden");
     document.querySelector(".caracteristics .three").classList.add("hidden");
+    document.querySelector(".caracteristics").classList.remove("hidden");
     updateScreen();
     localStorage.setItem("gameData", JSON.stringify(gameData));
 }

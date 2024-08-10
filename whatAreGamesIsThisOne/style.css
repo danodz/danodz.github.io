@@ -2,8 +2,13 @@ body{
     background-color: white;
 }
 
+.restart{
+    font-size: 40px;
+}
+
 .textLink{
     float: right;
+    font-size: 40px;
 }
 
 .text{
@@ -18,20 +23,34 @@ body{
 .middleSection{
 }
 
-@media (min-width: 750px) {
+@media (min-width: 1000px) {
     .caracteristics{
         width: 33%;
+        position: absolute;
+    }
+}
+
+@media (min-width: 750px) and (max-width: 1000px) {
+    .caracteristics{
+        width: 20%;
+        position: absolute;
     }
 }
 
 .caracteristics{
-    display: inline-block;
-    vertical-align: middle;
-    text-align: right;
+    margin-top: 25px;
 }
 
+@media (min-width: 1400px){
+    .caracteristics div{
+        width: 420px;
+    }
+
+    .caracteristics{
+        text-align: right;
+    }
+}
 .caracteristics div{
-    width: fit-content;
     text-align: left;
     display: inline-block;
     margin-right: 35px;
@@ -47,7 +66,6 @@ body{
     text-align: center;
     font-size: 30px;
     margin-top: 25px;
-    display: inline-block;
     vertical-align: middle;
 }
 
@@ -68,6 +86,25 @@ body{
     height: 200px;
     background-color: red;
     margin-left: 100px;
+}
+
+@media (max-width: 515px) {
+    .loseBtn{
+        width: 100px;
+        height: 100px;
+        margin-left: 50px;
+    }
+
+    .winBtn{
+        border-left: 50px solid transparent;
+        border-right: 50px solid transparent;
+        border-bottom: 100px solid blue;
+    }
+}
+@media (max-width: 265px) {
+    .loseBtn{
+        margin-left: 0px;
+    }
 }
 
 .winScore{
