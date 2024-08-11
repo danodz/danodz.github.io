@@ -129,6 +129,12 @@ body{
     }
 }
 
+.threeImgs img{
+    vertical-align: middle;
+    width: 33%;
+    min-width: 175px;
+}
+
 .winScore{
     margin-top: 50px;
 }

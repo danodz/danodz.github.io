@@ -64,7 +64,7 @@ const texts = [
 "But, plot twist, I also do not believe something needs to be challenging to be a game.",
 "(We will put aside the fact that “challenging” is subjective, because we already had that conversation with “interesting”, and we can have it again with basically every term that will be used to define what a game is).",
 "I don’t want to go the “is chess challenging? Is tic-tac-toe challenging?” route, so I’ll take examples that are unambiguously not challenging.",
-"Luck-based games are a good example of that. Snakes and Ladders, TROUBLE and War (Battle) are all games that require no skill whatsoever.<img src='res/snakesLadders.jpg'><img src='res/trouble.jpg'><img src='res/war.png'>",
+"<div>Luck-based games are a good example of that. Snakes and Ladders, TROUBLE and War (Battle) are all games that require no skill whatsoever.</div><div class='threeImgs'><img src='res/snakesLadders.jpg'><img src='res/trouble.jpg'><img src='res/war.png'></div>",
 "Except if you have a very peculiar view of the word that believe luck is a skill and that it can be fostered, you’d be forced to admit there exist games that aren’t challenging in any way.",
 "(Or maybe you are consistent and disagree that any of the three games examples I just mentioned are in fact games; you’d go against their typical classification and popular belief, but I’d respect that).",
 "By the way, just to link that back with the definition saying games are a series of interesting decisions: luck-based games are also a prime example of how a game can involve no decision at all.",
