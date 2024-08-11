@@ -11,9 +11,15 @@ body{
     font-size: 40px;
 }
 
+.centerWrap{
+    text-align: center;
+}
+
 .text{
     text-align: center;
     font-size: 40px;
+    max-width: 1200px;
+    display: inline-block;
 }
 
 .loseInstructions{
@@ -99,6 +105,22 @@ body{
         border-left: 50px solid transparent;
         border-right: 50px solid transparent;
         border-bottom: 100px solid blue;
+    }
+
+    .rules{
+        font-size: 46px;
+    }
+    
+    .game{
+        font-size: 60px;
+    }
+    
+    .text{
+        font-size: 80px;
+    }
+    
+    .caracteristics{
+        font-size: 32px;
     }
 }
 @media (max-width: 265px) {
