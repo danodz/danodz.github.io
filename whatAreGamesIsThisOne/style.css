@@ -106,9 +106,9 @@ body{
         border-right: 50px solid transparent;
         border-bottom: 100px solid blue;
     }
-
+/*
     .rules{
-        font-size: 34px;
+        font-size: 30px;
     }
     
     .game{
@@ -122,6 +122,7 @@ body{
     .caracteristics{
         font-size: 24px;
     }
+*/
 }
 @media (max-width: 265px) {
     .loseBtn{
