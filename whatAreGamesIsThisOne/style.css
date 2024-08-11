@@ -108,19 +108,19 @@ body{
     }
 
     .rules{
-        font-size: 46px;
+        font-size: 34px;
     }
     
     .game{
-        font-size: 60px;
+        font-size: 45px;
     }
     
     .text{
-        font-size: 80px;
+        font-size: 60px;
     }
     
     .caracteristics{
-        font-size: 32px;
+        font-size: 24px;
     }
 }
 @media (max-width: 265px) {
