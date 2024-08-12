@@ -2,6 +2,10 @@ body{
     background-color: white;
 }
 
+.topBtns{
+    overflow: auto;
+}
+
 .restart{
     font-size: 40px;
 }
@@ -106,24 +110,35 @@ body{
         border-right: 50px solid transparent;
         border-bottom: 100px solid blue;
     }
-/*
+
+    .restart{
+        font-size: 25px;
+    }
+
+    .textLink{
+        font-size: 25px;
+        width: 165px;
+    }
+    
     .rules{
-        font-size: 30px;
+        font-size: 29px;
+        margin-top: 15px;
     }
     
     .game{
-        font-size: 45px;
+        font-size: 25px;
     }
     
     .text{
-        font-size: 60px;
+        font-size: 25px;
     }
     
-    .caracteristics{
-        font-size: 24px;
+    .caracteristics p{
+        font-size: 15px;
+        margin: 5px 0;
     }
-*/
 }
+
 @media (max-width: 265px) {
     .loseBtn{
         margin-left: 0px;
