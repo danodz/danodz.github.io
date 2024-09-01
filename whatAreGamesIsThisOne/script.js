@@ -8,6 +8,24 @@ else
         loseCount: 0,
         meme: true
     };
+
+document.querySelector(".text").innerHTML = texts.reduce((longest, current)=>{
+    return longest.length>current.length?longest:current;
+}, "");
+document.querySelector(".caracteristics .one").classList.remove("hidden");
+document.querySelector(".caracteristics .two").classList.remove("hidden");
+document.querySelector(".caracteristics .three").classList.remove("hidden");
+
+const textNode = document.querySelector(".text");
+let fontSize = parseInt(window.getComputedStyle(textNode).fontSize);
+while(hasVerticalScroll() && fontSize>1){
+    fontSize -= 1;
+    textNode.style.fontSize = fontSize+"px";
+}
+document.querySelector(".caracteristics .one").classList.add("hidden");
+document.querySelector(".caracteristics .two").classList.add("hidden");
+document.querySelector(".caracteristics .three").classList.add("hidden");
+
 updateScreen();
 function updateScreen(){
     document.querySelector(".loseCount").innerHTML = gameData.loseCount;
@@ -27,8 +45,11 @@ function updateScreen(){
         if(gameData.currentText >= 179){
             document.querySelector(".caracteristics .three").classList.remove("hidden");
         }
-        if(gameData.currentText >= 208){
+        if(gameData.currentText < 177 || gameData.currentText >= 208){
             document.querySelector(".caracteristics").classList.add("hidden");
+        }
+        if(gameData.currentText >= 177 && gameData.currentText <= 208){
+            document.querySelector(".caracteristics").classList.remove("hidden");
         }
     }
 }
@@ -85,4 +106,34 @@ function restart(){
     document.querySelector(".caracteristics").classList.remove("hidden");
     updateScreen();
     localStorage.setItem("gameData", JSON.stringify(gameData));
+}
+
+function hasVerticalScroll(node){
+    if(node == undefined){
+        if(window.innerHeight){
+            return document.body.offsetHeight> window.innerHeight;
+        }
+        else {
+            return  document.documentElement.scrollHeight > 
+                document.documentElement.offsetHeight ||
+                document.body.scrollHeight>document.body.offsetHeight;
+        }
+    }
+    else {
+        return node.scrollHeight> node.offsetHeight;
+    }
+}
+
+function openHistory(){
+    const historyWindow = document.querySelector(".history");
+    const historyContent = document.querySelector(".history .content");
+    historyWindow.classList.remove("hidden");
+    historyContent.innerHTML = "<p>- Press the blue triangle to win. Press the red square to lose.</p>"; 
+    for(let i = 1; i<gameData.currentText; i++){
+        historyContent.innerHTML += "<p>- " + texts[i] + "</p>";
+    }
+}
+
+function closeHistory(){
+    document.querySelector(".history").classList.add("hidden");
 }

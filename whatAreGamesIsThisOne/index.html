@@ -5,9 +5,19 @@
 		<link rel="stylesheet" href="style.css">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
 	</head>
-    <body>
+    <body><div class="global">
+
+        <div class="history hidden">
+            <div class="background" onclick="closeHistory();"></div>
+            <div class="popup">
+                <div class="top"><button class="closeHistory" onclick="closeHistory();">X</button></div>
+                <div class="content"></div>
+            </div>
+        </div>
+
         <div class="topBtns">
     		<button class="restart" onclick="restart();">Restart</button>
+    		<button class="openHistory" onclick="openHistory();">Previous texts</button>
     		<a class="textLink" href="fullContent.html" target="_blank">Whole text without game</a>
         </div>
         <div class="rules"> Press the blue triangle to win. Press the red square to lose. </div>
@@ -31,7 +41,7 @@
             <div class="text">
             </div>
         </div>
-    </body>
+    </div></body>
 
     <script src="./texts.js"></script>
     <script src="./script.js"></script>
