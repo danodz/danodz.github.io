@@ -132,8 +132,16 @@ function openHistory(){
     for(let i = 1; i<gameData.currentText; i++){
         historyContent.innerHTML += "<p>- " + texts[i] + "</p>";
     }
+
+    historyContent.scrollTo(0,historyContent.scrollHeight);
 }
 
 function closeHistory(){
     document.querySelector(".history").classList.add("hidden");
+}
+
+document.onkeydown = (e)=>{
+    if(e.keyCode == 27){
+        closeHistory();
+    }
 }
