@@ -1,4 +1,4 @@
-let root = "/FPE2150_MicroEnseignement/";
+let root = "/";
 let searchParams = new URLSearchParams(document.location.search);
 let today = new Date().getTime();
 let day;
@@ -58,5 +58,5 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".navigation").innerHTML = `
             <a class="${location.pathname==root+"index.html"?"active":""}" href="${root}index.html">Accueil</a>
             <a class="${!searchParams.has("day") && location.pathname!=root+"index.html"?"active":""}" href="${root}${playHref}">Révision du jour</a>
-            <a class="${searchParams.has("day")?"active":""}" href="${root}semaine1/section1.html?day=${0}&reset">Contenu en rafale</a>`
+            <a class="${searchParams.has("day")?"active":""}" href="${root}semaine1/section1.html?day=0&reset">Contenu en rafale</a>`
 });
