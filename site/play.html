@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="script.js"></script>
+        <script src="play.js"></script>
+        <link href="style.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="navigation"></div>
+        <div class="content">
+            <div class="done hidden">
+                <div>Fini pour aujourd'hui</div>
+                <a class="hidden tomorrowLink">Passer au lendemain</a>
+            </div>
+            <div class="questionCard">
+                <div class="question"></div>
+                <div class="answer invisible"></div>
+                <button class="reveal" onclick="reveal();">Révéler la réponse</button>
+                <div class="resultButtons">
+                    <button class="fail hidden" onclick="fail();">Je n'ai pas réussi</button>
+                    <button class="success hidden" onclick="success();">J'ai réussi</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
