@@ -1,4 +1,4 @@
-let root = "/";
+let root = "/FPE2150_MicroEnseignement";
 let searchParams = new URLSearchParams(document.location.search);
 let today = new Date().getTime();
 let day;
