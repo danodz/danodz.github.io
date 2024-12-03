@@ -17,7 +17,7 @@ let nextQuestion = ()=>{
             if(steps.length > day+1){
                 tomorowLink.href = steps[day+1] + "?day=" + (day+1);
             } else {
-                tomorowLink.href = "/play.html?day=" + (day+1);
+                tomorowLink.href = root+"play.html?day=" + (day+1);
             }
             tomorowLink.classList.remove("hidden");
         }

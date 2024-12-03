@@ -17,9 +17,9 @@ let proceed = ()=>{
     
     savePlayer();
     if(searchParams.has("day")){
-        location.href = "/play.html?day="+day;
+        location.href = root+"play.html?day="+day;
     } else {
-        location.href = "/play.html";
+        location.href = root+"play.html";
     }
 }
 
