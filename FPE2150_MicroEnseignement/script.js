@@ -1,4 +1,4 @@
-let root = "/FPE2150_MicroEnseignement/";
+let root = "/";
 let searchParams = new URLSearchParams(document.location.search);
 let today = new Date().getTime();
 let day;
@@ -9,11 +9,11 @@ if(searchParams.has("day")){
 }
 
 let steps = [
-    root+"semaine1/section1.html",
-    root+"semaine1/section2.html",
-    root+"semaine1/section3.html",
-    root+"semaine1/section4.html",
-    root+"play.html",
+    "semaine1/section1.html",
+    "semaine1/section2.html",
+    "semaine1/section3.html",
+    "semaine1/section4.html",
+    "play.html",
 ]
 
 let levels = [1, 2, 4, 8, 16, 32, 64];
@@ -54,9 +54,9 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
         playHref = "semaine1/section1.html"
     }
-
+    console.log(playHref)
     document.querySelector(".navigation").innerHTML = `
             <a class="${location.pathname==root+"index.html"||location.pathname==root?"active":""}" href="${root}">Accueil</a>
-            <a class="${!searchParams.has("day") && location.pathname!=root+"index.html"&&location.pathname!=root?"active":""}" href="${root}${playHref}">Révision du jour</a>
+            <a class="${!searchParams.has("day") && location.pathname!=root+"index.html"&&location.pathname!=root?"active":""}" href="${root+playHref}">Révision du jour</a>
             <a class="${searchParams.has("day")?"active":""}" href="${root}semaine1/section1.html?day=0&reset">Contenu en rafale</a>`
 });

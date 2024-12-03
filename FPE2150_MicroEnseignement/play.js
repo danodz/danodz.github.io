@@ -15,7 +15,7 @@ let nextQuestion = ()=>{
         if(searchParams.has("day")){
             let tomorowLink = document.querySelector(".tomorrowLink");
             if(steps.length > day+1){
-                tomorowLink.href = steps[day+1] + "?day=" + (day+1);
+                tomorowLink.href = root+steps[day+1] + "?day=" + (day+1);
             } else {
                 tomorowLink.href = root+"play.html?day=" + (day+1);
             }
