@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if(localStorage.getItem("player")){
         let p = JSON.parse(localStorage.getItem("player"));
         if(p.progress.nextStepTime < new Date().getTime() && steps.length > p.progress.step){
-            playHref = steps[player.progress.step];        
+            playHref = steps[p.progress.step];        
         } else {
             playHref = "play.html"
         }
